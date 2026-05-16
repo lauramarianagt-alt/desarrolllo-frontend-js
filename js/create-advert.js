@@ -26,7 +26,7 @@ if (advertId) {
   }
 
   form.elements.name.value = advert.name;
-  form.elements.price.value = advert.price;
+  form.elements.description.value = advert.description || "";
   form.elements.price.value = advert.price;
   form.elements.sale.value = advert.sale.toString();
   form.elements.photo.value = advert.photo || "";

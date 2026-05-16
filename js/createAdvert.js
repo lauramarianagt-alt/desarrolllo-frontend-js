@@ -5,7 +5,11 @@
 
     advertElement.innerHTML = `
         <h2>${advert.name}</h2>
+        <p>${advert.description || "Sin descripción"}</p>
         <p>Price: $${advert.price}</p>
+        <p>${advert.sale ? "Venta" : "Compra"}</p>
+        ${advert.photo ? `<img src="${advert.photo}" alt="${advert.name}" width="200">` : ""}
+
     `;
 
 
