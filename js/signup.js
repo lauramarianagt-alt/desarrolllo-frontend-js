@@ -1,25 +1,17 @@
-const form = document.querySelector("#signup-form");
+import { validateUsername, validatePassword } from "./validators.js";
+import { signupController } from "./signup/signup-controller.js";
+import { notificationsController } from "./notifications/notification-controller.js";
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+const signupForm = document.querySelector('form');
+const notificationsContainer = document.querySelector('.notifications-container');
 
-  const formData = new FormData(form);
+const { showNotification } = notificationsController(notificationsContainer)
 
-  const username = formData.get("username");
-  const password = formData.get("password");
+signupForm.addEventListener('userCreated', (event) => {
+  showNotification(event.detail.message, event.detail.type)
+})
+signupForm.addEventListener('userNotCreated', (event) => {
+  showNotification(event.detail.message, event.detail.type)
+})
 
-  const response = await fetch("http://127.0.0.1:8000/auth/register", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    username,
-    password
-  })
-});
-
-const data = await response.json();
-
-console.log(data);
-});
+signupController(signupForm)

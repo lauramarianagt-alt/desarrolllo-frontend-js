@@ -44,3 +44,19 @@ export async function createAdvert(advert) {
 
     return createdAdvert;
 }
+
+export async function updateAdvert(advertId, advert) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`http://127.0.0.1:8000/api/adverts/${advertId}`, {
+    method: "PUT",
+    body: JSON.stringify(advert),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const updatedAdvert = await response.json();
+  return updatedAdvert;
+}

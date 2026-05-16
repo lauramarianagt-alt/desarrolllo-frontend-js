@@ -12,14 +12,20 @@
     </header>
 
     <form id="create-advert-form">
-        <input type="text" name="name" placeholder="Nombre del producto" required>
+        <input type="text" name="name" placeholder="Nombre" required>
+        <textarea name="description" placeholder="Descripción" required></textarea>
         <input type="number" name="price" placeholder="Precio" required>
-        <button type="submit">Crear anuncio</button>
+        <select name="sale" required>
+            <option value="">Selecciona</option>
+            <option value="true">Venta</option>
+            <option value="false">Compra</option>
+        </select>
+        <input type="text" name="photo" placeholder="URL imagen (opcional)">
+        <button type="submit">Guardar anuncio</button>
     </form>
 
-
     <script type="module" src="./js/create-advert.js"></script>
-        
+
     
 </body>
 </html>
