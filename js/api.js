@@ -1,6 +1,6 @@
-export async function getAdverts() {
+export async function getAdverts(advertId) {
   const token = localStorage.getItem("token");
-  const response = await fetch("http://127.0.0.1:8000/api/adverts", {
+  const response = await fetch(("http://127.0.0.1:8000/api/adverts"), {
     headers: {
       "Authorization": `Bearer ${token}`
     }
@@ -9,6 +9,23 @@ export async function getAdverts() {
   const adverts = await response.json();
 
   return adverts;
+}
+
+export async function getAdvert(advertId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(
+    `http://127.0.0.1:8000/api/adverts/${advertId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const advert = await response.json();
+
+  return advert;
 }
 
 export async function createAdvert(advert) {

@@ -14,7 +14,7 @@
 
             deleteButton.addEventListener("click", async () => {
                 const token = localStorage.getItem("token");
-                
+
                 await fetch(`http://127.0.0.1:8000/api/adverts/${advert.id}`, {
                     method: "DELETE",
                     headers: {
@@ -24,9 +24,16 @@
                 advertElement.remove();
             });
     
-    advertElement.appendChild(deleteButton);        
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar";
     
+    editButton.addEventListener("click", () => {
+        window.location.href = `./create-advert.html?id=${advert.id}`;
+});
 
-    return advertElement;
+advertElement.appendChild(deleteButton);
+advertElement.appendChild(editButton);
+
+return advertElement;
 }   
 
