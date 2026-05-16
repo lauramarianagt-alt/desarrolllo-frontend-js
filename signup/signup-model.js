@@ -14,10 +14,9 @@ export const createUser = async (email, password) => {
   })
 
   if (!response.ok) {
-    // obtener mensaje de error de la respuesta del endpoint
+   
     const data = await response.json()
     
-    // disparar error
     throw new Error(data.message)
   }
 

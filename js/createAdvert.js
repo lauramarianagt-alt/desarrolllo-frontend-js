@@ -1,4 +1,5 @@
  export function createAdvert(advert) {
+    const token = localStorage.getItem("token");
     const advertElement = document.createElement("div");
 
     advertElement.classList.add("advert");
@@ -12,11 +13,21 @@
 
     `;
 
+    advertElement.addEventListener("click", () => {
+        window.location.href = `./advert-detail.html?id=${advert.id}`;
+    });
+
 
     const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
 
-            deleteButton.addEventListener("click", async () => {
+            deleteButton.addEventListener("click", async (event) => {
+                event.stopPropagation();
+                const confirmed = confirm("¿Seguro que quieres borrar este anuncio?");
+                
+                if (!confirmed) {
+                    return;
+                }
                 const token = localStorage.getItem("token");
 
                 await fetch(`http://127.0.0.1:8000/api/adverts/${advert.id}`, {
@@ -31,12 +42,16 @@
     const editButton = document.createElement("button");
     editButton.textContent = "Editar";
     
-    editButton.addEventListener("click", () => {
+    editButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+
         window.location.href = `./create-advert.html?id=${advert.id}`;
 });
 
-advertElement.appendChild(deleteButton);
-advertElement.appendChild(editButton);
+if (token) {
+    advertElement.appendChild(deleteButton);
+    advertElement.appendChild(editButton);
+}
 
 return advertElement;
 }   

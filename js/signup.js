@@ -1,17 +1,6 @@
-import { validateUsername, validatePassword } from "./validators.js";
-import { signupController } from "./signup/signup-controller.js";
-import { notificationsController } from "./notifications/notification-controller.js";
+import { signupController } from "./signup-controller.js";
 
-const signupForm = document.querySelector('form');
-const notificationsContainer = document.querySelector('.notifications-container');
 
-const { showNotification } = notificationsController(notificationsContainer)
+const signupForm = document.querySelector("form");
 
-signupForm.addEventListener('userCreated', (event) => {
-  showNotification(event.detail.message, event.detail.type)
-})
-signupForm.addEventListener('userNotCreated', (event) => {
-  showNotification(event.detail.message, event.detail.type)
-})
-
-signupController(signupForm)
+signupController(signupForm);

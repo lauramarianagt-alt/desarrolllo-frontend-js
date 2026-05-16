@@ -20,11 +20,28 @@ if (token) {
 const advertsContainer = document.querySelector("#adverts-container");
 
 async function loadAdverts() {
-  const adverts = await getAdverts();
+  advertsContainer.innerHTML = "<p>Cargando anuncios...</p>";
+  try {
+    const adverts = await getAdverts();
+
+
+  if (adverts.length === 0) {
+    advertsContainer.innerHTML = "<p>No hay anuncios disponibles.</p>";
+    return;
+  }
+
+  advertsContainer.innerHTML = "";
+
   adverts.forEach((advert) => {
     const advertElement = createAdvert(advert);
     advertsContainer.appendChild(advertElement);
   });
+
+  } catch (error) {
+    advertsContainer.innerHTML = "<p>Error al cargar los anuncios.</p>";
+      console.error("Error fetching adverts:", error);
+      
+  } 
 }
 
 loadAdverts();
